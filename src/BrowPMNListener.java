@@ -1,9 +1,4 @@
 // Generated from BrowPMN.g4 by ANTLR 4.5.1
-
-import ast.Expr;
-import static ast.Expr.*;
-import ast.Op;
-
 import org.antlr.v4.runtime.tree.ParseTreeListener;
 
 /**
@@ -22,33 +17,43 @@ public interface BrowPMNListener extends ParseTreeListener {
 	 */
 	void exitProg(BrowPMNParser.ProgContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link BrowPMNParser#sttm}.
+	 * Enter a parse tree produced by {@link BrowPMNParser#inicio}.
 	 * @param ctx the parse tree
 	 */
-	void enterSttm(BrowPMNParser.SttmContext ctx);
+	void enterInicio(BrowPMNParser.InicioContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link BrowPMNParser#sttm}.
+	 * Exit a parse tree produced by {@link BrowPMNParser#inicio}.
 	 * @param ctx the parse tree
 	 */
-	void exitSttm(BrowPMNParser.SttmContext ctx);
+	void exitInicio(BrowPMNParser.InicioContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link BrowPMNParser#assign}.
+	 * Enter a parse tree produced by {@link BrowPMNParser#assinatura}.
 	 * @param ctx the parse tree
 	 */
-	void enterAssign(BrowPMNParser.AssignContext ctx);
+	void enterAssinatura(BrowPMNParser.AssinaturaContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link BrowPMNParser#assign}.
+	 * Exit a parse tree produced by {@link BrowPMNParser#assinatura}.
 	 * @param ctx the parse tree
 	 */
-	void exitAssign(BrowPMNParser.AssignContext ctx);
+	void exitAssinatura(BrowPMNParser.AssinaturaContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link BrowPMNParser#expr}.
+	 * Enter a parse tree produced by {@link BrowPMNParser#fluxo}.
 	 * @param ctx the parse tree
 	 */
-	void enterExpr(BrowPMNParser.ExprContext ctx);
+	void enterFluxo(BrowPMNParser.FluxoContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link BrowPMNParser#expr}.
+	 * Exit a parse tree produced by {@link BrowPMNParser#fluxo}.
 	 * @param ctx the parse tree
 	 */
-	void exitExpr(BrowPMNParser.ExprContext ctx);
+	void exitFluxo(BrowPMNParser.FluxoContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link BrowPMNParser#valor}.
+	 * @param ctx the parse tree
+	 */
+	void enterValor(BrowPMNParser.ValorContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link BrowPMNParser#valor}.
+	 * @param ctx the parse tree
+	 */
+	void exitValor(BrowPMNParser.ValorContext ctx);
 }

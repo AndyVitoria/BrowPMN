@@ -1,10 +1,5 @@
 // Generated from BrowPMN.g4 by ANTLR 4.5.1
 
-import ast.Expr;
-import static ast.Expr.*;
-import ast.Op;
-
-
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.tree.ErrorNode;
 import org.antlr.v4.runtime.tree.TerminalNode;
@@ -32,37 +27,49 @@ public class BrowPMNBaseListener implements BrowPMNListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterSttm(BrowPMNParser.SttmContext ctx) { }
+	@Override public void enterInicio(BrowPMNParser.InicioContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitSttm(BrowPMNParser.SttmContext ctx) { }
+	@Override public void exitInicio(BrowPMNParser.InicioContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterAssign(BrowPMNParser.AssignContext ctx) { }
+	@Override public void enterAssinatura(BrowPMNParser.AssinaturaContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitAssign(BrowPMNParser.AssignContext ctx) { }
+	@Override public void exitAssinatura(BrowPMNParser.AssinaturaContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterExpr(BrowPMNParser.ExprContext ctx) { }
+	@Override public void enterFluxo(BrowPMNParser.FluxoContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitExpr(BrowPMNParser.ExprContext ctx) { }
+	@Override public void exitFluxo(BrowPMNParser.FluxoContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterValor(BrowPMNParser.ValorContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitValor(BrowPMNParser.ValorContext ctx) { }
 
 	/**
 	 * {@inheritDoc}

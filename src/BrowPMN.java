@@ -24,7 +24,7 @@ public class BrowPMN {
         BrowPMNParser parser = new BrowPMNParser(tokens);
         BrowPMNParser.ProgContext ans = parser.prog();
         System.out.printf("\n>>> " + ans.result);
-    }*/
+    }
 public static void main(String[] args) throws IOException {
     BufferedReader rd = new BufferedReader(new InputStreamReader(System.in));
     System.out.printf(">>> ");
@@ -41,11 +41,11 @@ public static void main(String[] args) throws IOException {
         BrowPMNParser.SttmContext ans = parser.sttm();
         if (ans.result != null) {
             System.out.printf("### %s\n", ans.result);
-            System.out.printf("%s\n", ans.result.eval(ctx));
+            //System.out.printf("%s\n", ans.result.eval(ctx));
         }
         System.out.printf(">>> ");
         expr = rd.readLine();
         lineNo += 1;
     }
-    }
+    }*/
 }

@@ -1,4 +1,4 @@
-grammar BrowPMN;
+/*grammar BrowPMN;
 
 @header {
 import ast.Expr;
@@ -33,4 +33,52 @@ STRING : STRTAG (CHAR|WS)* STRTAG;
 ID      : [_a-zA-Z][_a-zA-Z0-9]* ;
 NEWLINE : '\r'? '\n' ;
 GETS    : '=' ;
+IGNORE      : [ \t\r\n]+ -> skip;*/
+
+grammar BrowPMN;
+
+
+prog
+    : (inicio)+
+    ;
+
+inicio
+    : assinatura NEWLINE
+    | NEWLINE
+    ;
+
+assinatura
+    : ID ATRIBUICAO valor
+    | TAGINICIO ID ATRIBUICAO valor
+    | TAGFIM ID ATRIBUICAO valor
+    | fluxo
+    ;
+
+fluxo
+    : ID PROXIMO ID (LPAR STRING RPAR)?
+    ;
+
+funcao
+    : ID LPAR (ID (COMMA ID)*)? RPAR LCOL inicio RCOL
+    ;
+
+valor
+    : STRING
+    ;
+
+COMMA : ',' ;
+TAGINICIO : '!' ;
+TAGFIM : '#' ;
+LPAR : '(' ;
+RPAR : ')' ;
+PROXIMO : '->' ;
+LCOL : '{' ;
+RCOL : '}' ;
+fragment WS : ' ';
+fragment CHAR : [a-zA-Z0-9];
+fragment STRTAG : '"' ;
+STRING : STRTAG (CHAR|WS)* STRTAG;
+ID : [_a-zA-Z][_a-zA-Z0-9]* ;
+NEWLINE : ';' ('\r'? '\n')* ;
+ATRIBUICAO    : '=' ;
 IGNORE      : [ \t\r\n]+ -> skip;
