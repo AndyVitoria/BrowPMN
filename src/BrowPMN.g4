@@ -1,71 +1,90 @@
-/*grammar BrowPMN;
-
-@header {
-import ast.Expr;
-import static ast.Expr.*;
-import ast.Op;
-}
-
-
-prog returns [Expr result]
-    : (s=sttm {$result = $s.result;})+
-    ;
-
-sttm returns [Expr result]
-    : e=expr NEWLINE      {$result = $e.result;}
-    | a=assign NEWLINE    {$result = $a.result;}
-    | NEWLINE             {$result = null;}
-    ;
-
-assign returns [Expr result]
-    : ID GETS e=expr      {$result = mkAssign($ID.text, $e.result);}
-    ;
-
-expr returns [Expr result]
-    : STRING {$result = mkString($STRING.text);}
-    ;
-
-
-fragment WS : ' ';
-fragment CHAR : [a-zA-Z0-9];
-fragment STRTAG : '"' ;
-STRING : STRTAG (CHAR|WS)* STRTAG;
-ID      : [_a-zA-Z][_a-zA-Z0-9]* ;
-NEWLINE : '\r'? '\n' ;
-GETS    : '=' ;
-IGNORE      : [ \t\r\n]+ -> skip;*/
-
 grammar BrowPMN;
 
 
 prog
-    : (inicio)+
+    : (sttm)+
     ;
 
-inicio
-    : assinatura NEWLINE
+
+sttm
+    : (funcao)+
     | NEWLINE
     ;
+
+
 
 assinatura
     : ID ATRIBUICAO valor
     | TAGINICIO ID ATRIBUICAO valor
     | TAGFIM ID ATRIBUICAO valor
     | fluxo
+    | ID ATRIBUICAO ID LPAR (ID (COMMA ID)*)? RPAR
+    | condicional
+    ;
+
+
+
+codigo
+    : (assinatura | NEWLINE)+
     ;
 
 fluxo
     : ID PROXIMO ID (LPAR STRING RPAR)?
     ;
 
-funcao
-    : ID LPAR (ID (COMMA ID)*)? RPAR LCOL inicio RCOL
+
+condicional
+    // Exclusivo
+    :  exclusivo (exclusivo_caminho)* (exclusivo_restante)?
+    // Paralelo
+    | paralelo (paralelo_caminho)*
+    // Repetição
+    | loop
     ;
+
+
+loop
+    :  WHILE LPAR ID COMMA ID RPAR (LPAR STRING RPAR)? LCOL (assinatura)* NEWLINE RCOL (LPAR STRING RPAR)?
+    ;
+
+
+paralelo
+    : DO LPAR ID COMMA ID RPAR (LPAR STRING RPAR)? LCOL (assinatura)* NEWLINE RCOL
+    ;
+
+
+paralelo_caminho : ELSE RPAR (LPAR STRING RPAR)? LCOL (assinatura)* NEWLINE RCOL
+    ;
+
+
+exclusivo
+    : IF LPAR ID COMMA ID RPAR (LPAR STRING RPAR)? LCOL (assinatura)* NEWLINE RCOL
+    ;
+
+
+exclusivo_caminho
+    : ELIF LPAR ID COMMA ID RPAR (LPAR STRING RPAR)? LCOL (assinatura)* NEWLINE RCOL
+    ;
+
+
+exclusivo_restante
+    : ELSE RPAR (LPAR STRING RPAR)? LCOL (assinatura)* NEWLINE RCOL
+    ;
+
+
+funcao
+    : FUNCTAG ID LPAR (ID (COMMA ID)*)? RPAR LCOL codigo NEWLINE RCOL
+    ;
+
 
 valor
     : STRING
     ;
 
+
+
+
+FUNCTAG : 'def';
 COMMA : ',' ;
 TAGINICIO : '!' ;
 TAGFIM : '#' ;
@@ -79,6 +98,12 @@ fragment CHAR : [a-zA-Z0-9];
 fragment STRTAG : '"' ;
 STRING : STRTAG (CHAR|WS)* STRTAG;
 ID : [_a-zA-Z][_a-zA-Z0-9]* ;
-NEWLINE : ';' ('\r'? '\n')* ;
+NEWLINE : '\r'? '\n' ;
 ATRIBUICAO    : '=' ;
-IGNORE      : [ \t\r\n]+ -> skip;
+WHILE : 'while' ;
+IF : 'if' ;
+ELIF : 'elif';
+ELSE : 'else' ;
+DO : 'do';
+AND : 'and';
+IGNORE : [ \t\r\n]+ -> skip;
