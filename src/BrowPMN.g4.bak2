@@ -10,47 +10,43 @@ prog returns [Node result]
 
 
 sttm returns [Node result]
-    : co=codigo {$result = $co.result;}
+    : (funcao)+ {$result = $funcao.result;}
+    | NEWLINE
     ;
 
-/*
+
 funcao returns [Node result]
     : FUNCTAG func=ID LPAR (var1=ID (COMMA var2=ID)) RPAR LCOL codigo NEWLINE RCOL{
         $result = new Function($func, $var1, $var2).setCode($codigo.result);
     }
 //    : FUNCTAG ID LPAR (ID (COMMA ID)*)? RPAR LCOL codigo NEWLINE RCOL
     ;
-*/
+
+
+valor returns [String result]
+    : str = STRING {$result = new String($str);}
+    ;
+
+
+assinatura returns [Node result]
+    : (id=ID) ATRIBUICAO valor {$result = new Variable('"'$id'"', $valor.result);}
+    | TAGINICIO (id=ID) ATRIBUICAO valor {$result = new Start($id, $valor.result);}
+    | TAGFIM (id=ID) ATRIBUICAO valor {$result = new End($id, $valor.result);}
+    | fl=fluxo {$result = $fl.result;}
+    //| (id=ID) ATRIBUICAO ID LPAR (ID (COMMA ID)*)? RPAR {$result = }
+    //| co=condicional {$result = $co.result;}
+    ;
+
 
 codigo returns [Node result]
     : (as=assinatura {$result = $as.result;}
         | NEWLINE)+
     ;
 
-
-assinatura returns [Node result]
-    : variavel {$result = $variavel.result;}
-    | fluxo {$result = $fluxo.result;}
-    ;
-
-
-variavel returns [Node result]
-    : id=ID '=' valor {$result = new Variable($id.getText(), $valor.result);}
-    | '!' id=ID '=' valor {$result = new Start($id.getText(), $valor.result);}
-    | '#' id=ID '=' valor {$result = new End($id.getText(), $valor.result);}
-    ;
-
-
 fluxo returns [Node result]
-    : (var=variavel) '->' (next=variavel) {$result = $var.result.setNextNode($next.result);}
-    | (var=variavel) '->' (next=variavel) ('(' valor ')') {$result = $var.result.setNextNode($next.result, $valor.result);}
+    : (var=ID) PROXIMO (next=ID) {$result = Node.setNextNode($var, $next);}
+    | (var=ID) PROXIMO (next=ID) (LPAR str=STRING RPAR) {$result = Node.setNextNode($var, $next, $str);}
     ;
-
-
-valor returns [String result]
-    : str = STRING {$result = new String($str.getText());}
-    ;
-
 
 /*
 condicional returns [Node result]

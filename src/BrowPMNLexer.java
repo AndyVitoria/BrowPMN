@@ -1,4 +1,7 @@
-// Generated from BrowPMN.g4 by ANTLR 4.7
+// Generated from BrowPMN.g4 by ANTLR 4.5.1
+
+import struct.*;
+
 import org.antlr.v4.runtime.Lexer;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.Token;
@@ -10,7 +13,7 @@ import org.antlr.v4.runtime.misc.*;
 
 @SuppressWarnings({"all", "warnings", "unchecked", "unused", "cast"})
 public class BrowPMNLexer extends Lexer {
-	static { RuntimeMetaData.checkVersion("4.7", RuntimeMetaData.VERSION); }
+	static { RuntimeMetaData.checkVersion("4.5.1", RuntimeMetaData.VERSION); }
 
 	protected static final DFA[] _decisionToDFA;
 	protected static final PredictionContextCache _sharedContextCache =
@@ -19,10 +22,6 @@ public class BrowPMNLexer extends Lexer {
 		FUNCTAG=1, COMMA=2, TAGINICIO=3, TAGFIM=4, LPAR=5, RPAR=6, PROXIMO=7, 
 		LCOL=8, RCOL=9, STRING=10, ID=11, NEWLINE=12, ATRIBUICAO=13, WHILE=14, 
 		IF=15, ELIF=16, ELSE=17, DO=18, AND=19, IGNORE=20;
-	public static String[] channelNames = {
-		"DEFAULT_TOKEN_CHANNEL", "HIDDEN"
-	};
-
 	public static String[] modeNames = {
 		"DEFAULT_MODE"
 	};
@@ -92,16 +91,13 @@ public class BrowPMNLexer extends Lexer {
 	public String getSerializedATN() { return _serializedATN; }
 
 	@Override
-	public String[] getChannelNames() { return channelNames; }
-
-	@Override
 	public String[] getModeNames() { return modeNames; }
 
 	@Override
 	public ATN getATN() { return _ATN; }
 
 	public static final String _serializedATN =
-		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\2\26\u0085\b\1\4\2"+
+		"\3\u0430\ud6d1\u8206\uad2d\u4417\uaef1\u8d80\uaadd\2\26\u0085\b\1\4\2"+
 		"\t\2\4\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t\t\4\n\t\n\4"+
 		"\13\t\13\4\f\t\f\4\r\t\r\4\16\t\16\4\17\t\17\4\20\t\20\4\21\t\21\4\22"+
 		"\t\22\4\23\t\23\4\24\t\24\4\25\t\25\4\26\t\26\4\27\t\27\4\30\t\30\3\2"+
@@ -113,18 +109,18 @@ public class BrowPMNLexer extends Lexer {
 		"\3\27\3\27\3\27\3\30\6\30\u0080\n\30\r\30\16\30\u0081\3\30\3\30\2\2\31"+
 		"\3\3\5\4\7\5\t\6\13\7\r\b\17\t\21\n\23\13\25\2\27\2\31\2\33\f\35\r\37"+
 		"\16!\17#\20%\21\'\22)\23+\24-\25/\26\3\2\6\5\2\62;C\\c|\5\2C\\aac|\6\2"+
-		"\62;C\\aac|\5\2\13\f\17\17\"\"\2\u0086\2\3\3\2\2\2\2\5\3\2\2\2\2\7\3\2"+
-		"\2\2\2\t\3\2\2\2\2\13\3\2\2\2\2\r\3\2\2\2\2\17\3\2\2\2\2\21\3\2\2\2\2"+
-		"\23\3\2\2\2\2\33\3\2\2\2\2\35\3\2\2\2\2\37\3\2\2\2\2!\3\2\2\2\2#\3\2\2"+
-		"\2\2%\3\2\2\2\2\'\3\2\2\2\2)\3\2\2\2\2+\3\2\2\2\2-\3\2\2\2\2/\3\2\2\2"+
-		"\3\61\3\2\2\2\5\65\3\2\2\2\7\67\3\2\2\2\t9\3\2\2\2\13;\3\2\2\2\r=\3\2"+
-		"\2\2\17?\3\2\2\2\21B\3\2\2\2\23D\3\2\2\2\25F\3\2\2\2\27H\3\2\2\2\31J\3"+
-		"\2\2\2\33L\3\2\2\2\35V\3\2\2\2\37^\3\2\2\2!b\3\2\2\2#d\3\2\2\2%j\3\2\2"+
-		"\2\'m\3\2\2\2)r\3\2\2\2+w\3\2\2\2-z\3\2\2\2/\177\3\2\2\2\61\62\7f\2\2"+
-		"\62\63\7g\2\2\63\64\7h\2\2\64\4\3\2\2\2\65\66\7.\2\2\66\6\3\2\2\2\678"+
-		"\7#\2\28\b\3\2\2\29:\7%\2\2:\n\3\2\2\2;<\7*\2\2<\f\3\2\2\2=>\7+\2\2>\16"+
-		"\3\2\2\2?@\7/\2\2@A\7@\2\2A\20\3\2\2\2BC\7}\2\2C\22\3\2\2\2DE\7\177\2"+
-		"\2E\24\3\2\2\2FG\7\"\2\2G\26\3\2\2\2HI\t\2\2\2I\30\3\2\2\2JK\7$\2\2K\32"+
+		"\62;C\\aac|\5\2\13\f\17\17\"\"\u0086\2\3\3\2\2\2\2\5\3\2\2\2\2\7\3\2\2"+
+		"\2\2\t\3\2\2\2\2\13\3\2\2\2\2\r\3\2\2\2\2\17\3\2\2\2\2\21\3\2\2\2\2\23"+
+		"\3\2\2\2\2\33\3\2\2\2\2\35\3\2\2\2\2\37\3\2\2\2\2!\3\2\2\2\2#\3\2\2\2"+
+		"\2%\3\2\2\2\2\'\3\2\2\2\2)\3\2\2\2\2+\3\2\2\2\2-\3\2\2\2\2/\3\2\2\2\3"+
+		"\61\3\2\2\2\5\65\3\2\2\2\7\67\3\2\2\2\t9\3\2\2\2\13;\3\2\2\2\r=\3\2\2"+
+		"\2\17?\3\2\2\2\21B\3\2\2\2\23D\3\2\2\2\25F\3\2\2\2\27H\3\2\2\2\31J\3\2"+
+		"\2\2\33L\3\2\2\2\35V\3\2\2\2\37^\3\2\2\2!b\3\2\2\2#d\3\2\2\2%j\3\2\2\2"+
+		"\'m\3\2\2\2)r\3\2\2\2+w\3\2\2\2-z\3\2\2\2/\177\3\2\2\2\61\62\7f\2\2\62"+
+		"\63\7g\2\2\63\64\7h\2\2\64\4\3\2\2\2\65\66\7.\2\2\66\6\3\2\2\2\678\7#"+
+		"\2\28\b\3\2\2\29:\7%\2\2:\n\3\2\2\2;<\7*\2\2<\f\3\2\2\2=>\7+\2\2>\16\3"+
+		"\2\2\2?@\7/\2\2@A\7@\2\2A\20\3\2\2\2BC\7}\2\2C\22\3\2\2\2DE\7\177\2\2"+
+		"E\24\3\2\2\2FG\7\"\2\2G\26\3\2\2\2HI\t\2\2\2I\30\3\2\2\2JK\7$\2\2K\32"+
 		"\3\2\2\2LQ\5\31\r\2MP\5\27\f\2NP\5\25\13\2OM\3\2\2\2ON\3\2\2\2PS\3\2\2"+
 		"\2QO\3\2\2\2QR\3\2\2\2RT\3\2\2\2SQ\3\2\2\2TU\5\31\r\2U\34\3\2\2\2VZ\t"+
 		"\3\2\2WY\t\4\2\2XW\3\2\2\2Y\\\3\2\2\2ZX\3\2\2\2Z[\3\2\2\2[\36\3\2\2\2"+
