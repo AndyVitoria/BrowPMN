@@ -1,58 +1,73 @@
 package struct;
 
+import org.omg.CosNaming.NamingContextExtPackage.StringNameHelper;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public abstract class Node{
-    private int ID;
-    private String assing;
-    private String data;
+    protected String tag;
     private List<Node> next = new ArrayList<Node>();
-    private String metadata;
+    private List<String> nextDescription = new ArrayList<String>();
+    public String graph;
+    String metadata;
+    String data;
+    public String name;
 
-    Node(String assing, String data){
-        this.assing = assing;
-        this.data = data;
+    public String getMetadata(){
+        if (metadata == null)
+            return null;
+
+        String meta = "";
+        Node temp;
+        String str;
+        for(int i=0; i<next.size(); i++){
+            temp = next.get(i);
+            meta = meta + getName() + " -> " + temp.getName() + " [label=\"" + nextDescription.get(i) + "\"];\n";
+        }
+
+        return this.metadata + meta;
     }
 
-    public int getID() {
-        return ID;
+
+    public void setTag(String tag){
+        this.tag = tag;
     }
 
-    public void setID(int ID) {
-        this.ID = ID;
+    public String getTag(){return tag;}
+
+    public String getName(){return name;}
+
+    public abstract Node eval(Map<String,Node> ctx);
+
+    public static Node mkVariable(String name){
+        return new Variable(name);
     }
 
-    public Node getFirstNode() {
-        return next.get(0);
+    public static Node mkAssing(String name, Node node, String tag){
+        node.setTag(tag);
+        return new AssingNode(name,node, tag);
     }
 
-    public Node setNextNode(Node next) {
-        this.next.add(next);
+    public Node setNextNode(Node result, String str) {
+        this.next.add(result);
+        this.nextDescription.add(str);
         return this;
     }
 
-    public String getMetadata() {
-        return metadata;
+    public String getInfo(){
+        return next(getName());
     }
 
-    public void setMetadata(String metadata) {
-        this.metadata = metadata;
-    }
+    protected String next(String name) {
+        String msg = getName() + '{';
+        if (tag != null)
+            msg = tag + msg;
 
-    public Node setNextNode(Node next, String trasition) {
-        this.next.add(next);
-        return this;
-    }
-
-    @Override
-    public String toString() {
-        return "Node{" +
-                "ID=" + ID +
-                ", assing='" + assing + '\'' +
-                ", data='" + data + '\'' +
-                ", next=" + next +
-                ", metadata='" + metadata + '\'' +
-                '}';
+        for(int i = 0; i < next.size(); i++){
+            msg = msg + name + "->" + next.get(i).getName() + " (" +nextDescription.get(i) + ")\n";
+        }
+        return msg + '}';
     }
 }

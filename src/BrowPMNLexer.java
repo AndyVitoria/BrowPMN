@@ -1,6 +1,7 @@
 // Generated from BrowPMN.g4 by ANTLR 4.5.1
 
 import struct.*;
+import static struct.Node.*;
 
 import org.antlr.v4.runtime.Lexer;
 import org.antlr.v4.runtime.CharStream;

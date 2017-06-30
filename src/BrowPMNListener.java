@@ -1,6 +1,7 @@
 // Generated from BrowPMN.g4 by ANTLR 4.5.1
 
 import struct.*;
+import static struct.Node.*;
 
 import org.antlr.v4.runtime.tree.ParseTreeListener;
 
@@ -30,16 +31,6 @@ public interface BrowPMNListener extends ParseTreeListener {
 	 */
 	void exitSttm(BrowPMNParser.SttmContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link BrowPMNParser#codigo}.
-	 * @param ctx the parse tree
-	 */
-	void enterCodigo(BrowPMNParser.CodigoContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link BrowPMNParser#codigo}.
-	 * @param ctx the parse tree
-	 */
-	void exitCodigo(BrowPMNParser.CodigoContext ctx);
-	/**
 	 * Enter a parse tree produced by {@link BrowPMNParser#assinatura}.
 	 * @param ctx the parse tree
 	 */
@@ -50,15 +41,15 @@ public interface BrowPMNListener extends ParseTreeListener {
 	 */
 	void exitAssinatura(BrowPMNParser.AssinaturaContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link BrowPMNParser#variavel}.
+	 * Enter a parse tree produced by {@link BrowPMNParser#atribuicao}.
 	 * @param ctx the parse tree
 	 */
-	void enterVariavel(BrowPMNParser.VariavelContext ctx);
+	void enterAtribuicao(BrowPMNParser.AtribuicaoContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link BrowPMNParser#variavel}.
+	 * Exit a parse tree produced by {@link BrowPMNParser#atribuicao}.
 	 * @param ctx the parse tree
 	 */
-	void exitVariavel(BrowPMNParser.VariavelContext ctx);
+	void exitAtribuicao(BrowPMNParser.AtribuicaoContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link BrowPMNParser#fluxo}.
 	 * @param ctx the parse tree
@@ -70,13 +61,23 @@ public interface BrowPMNListener extends ParseTreeListener {
 	 */
 	void exitFluxo(BrowPMNParser.FluxoContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link BrowPMNParser#valor}.
+	 * Enter a parse tree produced by {@link BrowPMNParser#variavel}.
 	 * @param ctx the parse tree
 	 */
-	void enterValor(BrowPMNParser.ValorContext ctx);
+	void enterVariavel(BrowPMNParser.VariavelContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link BrowPMNParser#valor}.
+	 * Exit a parse tree produced by {@link BrowPMNParser#variavel}.
 	 * @param ctx the parse tree
 	 */
-	void exitValor(BrowPMNParser.ValorContext ctx);
+	void exitVariavel(BrowPMNParser.VariavelContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link BrowPMNParser#string}.
+	 * @param ctx the parse tree
+	 */
+	void enterString(BrowPMNParser.StringContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link BrowPMNParser#string}.
+	 * @param ctx the parse tree
+	 */
+	void exitString(BrowPMNParser.StringContext ctx);
 }

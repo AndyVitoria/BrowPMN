@@ -1,6 +1,4 @@
-package struct;
-
-import org.antlr.v4.runtime.Token;
+package struct_bak.struct;
 
 /**
  * Created by andre on 27/06/17.

@@ -1,6 +1,4 @@
-package struct;
-
-import org.antlr.v4.runtime.Token;
+package struct_bak.struct;
 
 import java.util.Map;
 
@@ -14,14 +12,14 @@ public class Function extends Node {
 
 
     public Function(String assing, String var1, String var2) {
+        super(null,null);
         this.assing = assing;
         this.var1 = var1;
         this.var2= var2;
     }
 
-    @Override
-    public String getName() {
-        return assing;
+    public Node setCode(Node node){
+        return new Variable(var1,var1);
     }
 
     @Override

@@ -1,0 +1,6 @@
+!a = "aaaaa"
+b = "bbbbbb"
+#c = "ccccc"
+
+a->b
+b->c

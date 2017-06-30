@@ -1,6 +1,7 @@
 // Generated from BrowPMN.g4 by ANTLR 4.5.1
 
 import struct.*;
+import static struct.Node.*;
 
 
 import org.antlr.v4.runtime.ParserRuleContext;
@@ -42,18 +43,6 @@ public class BrowPMNBaseListener implements BrowPMNListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterCodigo(BrowPMNParser.CodigoContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitCodigo(BrowPMNParser.CodigoContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterAssinatura(BrowPMNParser.AssinaturaContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -66,13 +55,13 @@ public class BrowPMNBaseListener implements BrowPMNListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterVariavel(BrowPMNParser.VariavelContext ctx) { }
+	@Override public void enterAtribuicao(BrowPMNParser.AtribuicaoContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitVariavel(BrowPMNParser.VariavelContext ctx) { }
+	@Override public void exitAtribuicao(BrowPMNParser.AtribuicaoContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -90,13 +79,25 @@ public class BrowPMNBaseListener implements BrowPMNListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterValor(BrowPMNParser.ValorContext ctx) { }
+	@Override public void enterVariavel(BrowPMNParser.VariavelContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitValor(BrowPMNParser.ValorContext ctx) { }
+	@Override public void exitVariavel(BrowPMNParser.VariavelContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterString(BrowPMNParser.StringContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitString(BrowPMNParser.StringContext ctx) { }
 
 	/**
 	 * {@inheritDoc}
