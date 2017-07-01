@@ -13,14 +13,25 @@ public class AssingNode extends Node{
         this.node = node;
         this.node.name = varName;
         this.tag = tag;
-        String graph = "";
-        if (tag.equals("!"))
-            graph = "start [label=\"\", shape=circle];\n" +
-                    "start->" + varName + ";\n";
-        else if (tag.equals("#"))
-            graph = "end [label=\"\",shape=circle, style=bold];\n" +
-                    varName + "->end;\n";
-        metadata = graph + varName + " [label=" + node.toString() + ", shape=Square];\n";
+
+        switch (tag) {
+            case "!":
+                metadata = "start [label=\"\", shape=circle];\n" +
+                        varName + " [label=" + node.toString() + ", shape=Square];\n" +
+                        "start->" + varName + ";\n";
+                break;
+            case "#":
+                metadata = "end [label=\"\",shape=circle, style=bold];\n" +
+                        varName + " [label=" + node.toString() + ", shape=Square];\n" +
+                        varName + "->end;\n";
+                break;
+            case "->":
+                metadata = "";
+                break;
+            default:
+                metadata = varName + " [label=" + node.toString() + ", shape=Square];\n";
+                break;
+        }
     }
 
     @Override

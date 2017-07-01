@@ -79,18 +79,6 @@ public class BrowPMNBaseListener implements BrowPMNListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterVariavel(BrowPMNParser.VariavelContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitVariavel(BrowPMNParser.VariavelContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterString(BrowPMNParser.StringContext ctx) { }
 	/**
 	 * {@inheritDoc}

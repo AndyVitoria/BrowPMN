@@ -7,9 +7,10 @@ import java.util.List;
 import java.util.Map;
 
 public abstract class Node{
+    private static final int IF = 0;
     protected String tag;
-    private List<Node> next = new ArrayList<Node>();
-    private List<String> nextDescription = new ArrayList<String>();
+    public List<Node> next = new ArrayList<Node>();
+    public List<String> nextDescription = new ArrayList<String>();
     public String graph;
     String metadata;
     String data;
@@ -21,15 +22,18 @@ public abstract class Node{
 
         String meta = "";
         Node temp;
-        String str;
+        String description;
         for(int i=0; i<next.size(); i++){
             temp = next.get(i);
-            meta = meta + getName() + " -> " + temp.getName() + " [label=\"" + nextDescription.get(i) + "\"];\n";
+            description = nextDescription.get(i);
+            if (description == "")
+                meta = meta + getName() + " -> " + temp.getName() + " [label=\"\"];\n";
+            else
+                meta = meta + getName() + " -> " + temp.getName() + " [label=" + description + "];\n";
         }
 
         return this.metadata + meta;
     }
-
 
     public void setTag(String tag){
         this.tag = tag;
@@ -37,23 +41,29 @@ public abstract class Node{
 
     public String getTag(){return tag;}
 
+    public String getFluxe(){
+        String msg = "";
+
+        for(int i = 0; i < next.size(); i++){
+            msg = msg + name + "->" + next.get(i).getName() + " (" +nextDescription.get(i) + ")\n";
+        }
+        return msg;
+    }
+
     public String getName(){return name;}
 
     public abstract Node eval(Map<String,Node> ctx);
-
-    public static Node mkVariable(String name){
-        return new Variable(name);
-    }
 
     public static Node mkAssing(String name, Node node, String tag){
         node.setTag(tag);
         return new AssingNode(name,node, tag);
     }
 
-    public Node setNextNode(Node result, String str) {
-        this.next.add(result);
-        this.nextDescription.add(str);
-        return this;
+    public static Node setNextNode(String previous, String next, String description) {
+        Node tempNode = new AssingNode(previous, new Str(previous), "->");
+        tempNode.next.add(new AssingNode(next, new Str(next), "->"));
+        tempNode.nextDescription.add(description);
+        return tempNode;
     }
 
     public String getInfo(){
@@ -70,4 +80,9 @@ public abstract class Node{
         }
         return msg + '}';
     }
+
+    /*public Node mkExclusive(String var1, String var2, String condition, String transition){
+        Node exclusive = mkAssing("if_" + String.valueOf(this.IF), new AssingNode(var1, new Str(var1), "->"), "");
+        setNextNode(exclusive.name, var1, condition)
+    }*/
 }

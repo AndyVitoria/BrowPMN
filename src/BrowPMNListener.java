@@ -61,16 +61,6 @@ public interface BrowPMNListener extends ParseTreeListener {
 	 */
 	void exitFluxo(BrowPMNParser.FluxoContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link BrowPMNParser#variavel}.
-	 * @param ctx the parse tree
-	 */
-	void enterVariavel(BrowPMNParser.VariavelContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link BrowPMNParser#variavel}.
-	 * @param ctx the parse tree
-	 */
-	void exitVariavel(BrowPMNParser.VariavelContext ctx);
-	/**
 	 * Enter a parse tree produced by {@link BrowPMNParser#string}.
 	 * @param ctx the parse tree
 	 */

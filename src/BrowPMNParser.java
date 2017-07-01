@@ -25,9 +25,9 @@ public class BrowPMNParser extends Parser {
 		IF=15, ELIF=16, ELSE=17, DO=18, AND=19, IGNORE=20;
 	public static final int
 		RULE_prog = 0, RULE_sttm = 1, RULE_assinatura = 2, RULE_atribuicao = 3, 
-		RULE_fluxo = 4, RULE_variavel = 5, RULE_string = 6;
+		RULE_fluxo = 4, RULE_string = 5;
 	public static final String[] ruleNames = {
-		"prog", "sttm", "assinatura", "atribuicao", "fluxo", "variavel", "string"
+		"prog", "sttm", "assinatura", "atribuicao", "fluxo", "string"
 	};
 
 	private static final String[] _LITERAL_NAMES = {
@@ -119,18 +119,18 @@ public class BrowPMNParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(17); 
+			setState(15); 
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			do {
 				{
 				{
-				setState(14);
+				setState(12);
 				((ProgContext)_localctx).s = sttm();
 				((ProgContext)_localctx).result =  ((ProgContext)_localctx).s.result;
 				}
 				}
-				setState(19); 
+				setState(17); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << TAGINICIO) | (1L << TAGFIM) | (1L << STRING) | (1L << ID) | (1L << NEWLINE))) != 0) );
@@ -172,7 +172,7 @@ public class BrowPMNParser extends Parser {
 		SttmContext _localctx = new SttmContext(_ctx, getState());
 		enterRule(_localctx, 2, RULE_sttm);
 		try {
-			setState(25);
+			setState(23);
 			switch (_input.LA(1)) {
 			case TAGINICIO:
 			case TAGFIM:
@@ -180,7 +180,7 @@ public class BrowPMNParser extends Parser {
 			case ID:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(21);
+				setState(19);
 				((SttmContext)_localctx).co = assinatura();
 				((SttmContext)_localctx).result =  ((SttmContext)_localctx).co.result;
 				}
@@ -188,7 +188,7 @@ public class BrowPMNParser extends Parser {
 			case NEWLINE:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(24);
+				setState(22);
 				match(NEWLINE);
 				}
 				break;
@@ -210,11 +210,15 @@ public class BrowPMNParser extends Parser {
 	public static class AssinaturaContext extends ParserRuleContext {
 		public Node result;
 		public AtribuicaoContext atribuicao;
+		public FluxoContext fluxo;
 		public AtribuicaoContext atribuicao() {
 			return getRuleContext(AtribuicaoContext.class,0);
 		}
 		public StringContext string() {
 			return getRuleContext(StringContext.class,0);
+		}
+		public FluxoContext fluxo() {
+			return getRuleContext(FluxoContext.class,0);
 		}
 		public AssinaturaContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -234,27 +238,31 @@ public class BrowPMNParser extends Parser {
 		AssinaturaContext _localctx = new AssinaturaContext(_ctx, getState());
 		enterRule(_localctx, 4, RULE_assinatura);
 		try {
-			setState(31);
-			switch (_input.LA(1)) {
-			case TAGINICIO:
-			case TAGFIM:
-			case ID:
+			setState(32);
+			switch ( getInterpreter().adaptivePredict(_input,2,_ctx) ) {
+			case 1:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(27);
+				setState(25);
 				((AssinaturaContext)_localctx).atribuicao = atribuicao();
 				((AssinaturaContext)_localctx).result =  ((AssinaturaContext)_localctx).atribuicao.result;
 				}
 				break;
-			case STRING:
+			case 2:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(30);
+				setState(28);
 				string();
 				}
 				break;
-			default:
-				throw new NoViableAltException(this);
+			case 3:
+				enterOuterAlt(_localctx, 3);
+				{
+				setState(29);
+				((AssinaturaContext)_localctx).fluxo = fluxo();
+				((AssinaturaContext)_localctx).result =  ((AssinaturaContext)_localctx).fluxo.result;
+				}
+				break;
 			}
 		}
 		catch (RecognitionException re) {
@@ -273,16 +281,12 @@ public class BrowPMNParser extends Parser {
 		public Token id;
 		public StringContext string;
 		public Token tag;
-		public VariavelContext variavel;
 		public StringContext string() {
 			return getRuleContext(StringContext.class,0);
 		}
 		public TerminalNode ID() { return getToken(BrowPMNParser.ID, 0); }
 		public TerminalNode TAGINICIO() { return getToken(BrowPMNParser.TAGINICIO, 0); }
 		public TerminalNode TAGFIM() { return getToken(BrowPMNParser.TAGFIM, 0); }
-		public VariavelContext variavel() {
-			return getRuleContext(VariavelContext.class,0);
-		}
 		public AtribuicaoContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -301,57 +305,52 @@ public class BrowPMNParser extends Parser {
 		AtribuicaoContext _localctx = new AtribuicaoContext(_ctx, getState());
 		enterRule(_localctx, 6, RULE_atribuicao);
 		try {
-			setState(50);
-			switch ( getInterpreter().adaptivePredict(_input,4,_ctx) ) {
-			case 1:
+			setState(48);
+			switch (_input.LA(1)) {
+			case ID:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(33);
-				((AtribuicaoContext)_localctx).id = match(ID);
 				setState(34);
-				match(ATRIBUICAO);
+				((AtribuicaoContext)_localctx).id = match(ID);
 				setState(35);
+				match(ATRIBUICAO);
+				setState(36);
 				((AtribuicaoContext)_localctx).string = string();
 				((AtribuicaoContext)_localctx).result =  mkAssing(((AtribuicaoContext)_localctx).id.getText(), ((AtribuicaoContext)_localctx).string.result, "");
 				}
 				break;
-			case 2:
+			case TAGINICIO:
+			case TAGFIM:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(40);
+				setState(41);
 				switch (_input.LA(1)) {
 				case TAGINICIO:
 					{
-					setState(38);
+					setState(39);
 					((AtribuicaoContext)_localctx).tag = match(TAGINICIO);
 					}
 					break;
 				case TAGFIM:
 					{
-					setState(39);
+					setState(40);
 					((AtribuicaoContext)_localctx).tag = match(TAGFIM);
 					}
 					break;
 				default:
 					throw new NoViableAltException(this);
 				}
-				setState(42);
-				((AtribuicaoContext)_localctx).id = match(ID);
 				setState(43);
-				match(ATRIBUICAO);
+				((AtribuicaoContext)_localctx).id = match(ID);
 				setState(44);
+				match(ATRIBUICAO);
+				setState(45);
 				((AtribuicaoContext)_localctx).string = string();
 				((AtribuicaoContext)_localctx).result =  mkAssing(((AtribuicaoContext)_localctx).id.getText(), ((AtribuicaoContext)_localctx).string.result, ((AtribuicaoContext)_localctx).tag.getText());
 				}
 				break;
-			case 3:
-				enterOuterAlt(_localctx, 3);
-				{
-				setState(47);
-				((AtribuicaoContext)_localctx).variavel = variavel();
-				((AtribuicaoContext)_localctx).result =  ((AtribuicaoContext)_localctx).variavel.result;
-				}
-				break;
+			default:
+				throw new NoViableAltException(this);
 			}
 		}
 		catch (RecognitionException re) {
@@ -367,14 +366,12 @@ public class BrowPMNParser extends Parser {
 
 	public static class FluxoContext extends ParserRuleContext {
 		public Node result;
-		public AtribuicaoContext var;
-		public AtribuicaoContext next;
+		public Token var;
+		public Token next;
 		public Token str;
-		public List<AtribuicaoContext> atribuicao() {
-			return getRuleContexts(AtribuicaoContext.class);
-		}
-		public AtribuicaoContext atribuicao(int i) {
-			return getRuleContext(AtribuicaoContext.class,i);
+		public List<TerminalNode> ID() { return getTokens(BrowPMNParser.ID); }
+		public TerminalNode ID(int i) {
+			return getToken(BrowPMNParser.ID, i);
 		}
 		public TerminalNode STRING() { return getToken(BrowPMNParser.STRING, 0); }
 		public FluxoContext(ParserRuleContext parent, int invokingState) {
@@ -395,88 +392,48 @@ public class BrowPMNParser extends Parser {
 		FluxoContext _localctx = new FluxoContext(_ctx, getState());
 		enterRule(_localctx, 8, RULE_fluxo);
 		try {
-			setState(66);
+			setState(62);
 			switch ( getInterpreter().adaptivePredict(_input,5,_ctx) ) {
 			case 1:
 				enterOuterAlt(_localctx, 1);
 				{
 				{
-				setState(52);
-				((FluxoContext)_localctx).var = atribuicao();
+				setState(50);
+				((FluxoContext)_localctx).var = match(ID);
 				}
-				setState(53);
+				setState(51);
 				match(PROXIMO);
 				{
-				setState(54);
-				((FluxoContext)_localctx).next = atribuicao();
+				setState(52);
+				((FluxoContext)_localctx).next = match(ID);
 				}
-				((FluxoContext)_localctx).result =  ((FluxoContext)_localctx).var.result.setNextNode(((FluxoContext)_localctx).next.result, "");
+				((FluxoContext)_localctx).result =  Node.setNextNode(((FluxoContext)_localctx).var.getText(), ((FluxoContext)_localctx).next.getText(), "");
 				}
 				break;
 			case 2:
 				enterOuterAlt(_localctx, 2);
 				{
 				{
-				setState(57);
-				((FluxoContext)_localctx).var = atribuicao();
+				setState(54);
+				((FluxoContext)_localctx).var = match(ID);
 				}
-				setState(58);
+				setState(55);
 				match(PROXIMO);
 				{
-				setState(59);
-				((FluxoContext)_localctx).next = atribuicao();
+				setState(56);
+				((FluxoContext)_localctx).next = match(ID);
 				}
 				{
-				setState(60);
+				setState(57);
 				match(LPAR);
-				setState(61);
+				setState(58);
 				((FluxoContext)_localctx).str = match(STRING);
-				setState(62);
+				setState(59);
 				match(RPAR);
 				}
-				((FluxoContext)_localctx).result =  ((FluxoContext)_localctx).var.result.setNextNode(((FluxoContext)_localctx).next.result, ((FluxoContext)_localctx).str.getText());
+				((FluxoContext)_localctx).result =  Node.setNextNode(((FluxoContext)_localctx).var.getText(), ((FluxoContext)_localctx).next.getText(), ((FluxoContext)_localctx).str.getText());
 				}
 				break;
-			}
-		}
-		catch (RecognitionException re) {
-			_localctx.exception = re;
-			_errHandler.reportError(this, re);
-			_errHandler.recover(this, re);
-		}
-		finally {
-			exitRule();
-		}
-		return _localctx;
-	}
-
-	public static class VariavelContext extends ParserRuleContext {
-		public Node result;
-		public Token ID;
-		public TerminalNode ID() { return getToken(BrowPMNParser.ID, 0); }
-		public VariavelContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_variavel; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof BrowPMNListener ) ((BrowPMNListener)listener).enterVariavel(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof BrowPMNListener ) ((BrowPMNListener)listener).exitVariavel(this);
-		}
-	}
-
-	public final VariavelContext variavel() throws RecognitionException {
-		VariavelContext _localctx = new VariavelContext(_ctx, getState());
-		enterRule(_localctx, 10, RULE_variavel);
-		try {
-			enterOuterAlt(_localctx, 1);
-			{
-			setState(68);
-			((VariavelContext)_localctx).ID = match(ID);
-			((VariavelContext)_localctx).result =  mkVariable(((VariavelContext)_localctx).ID.getText());
 			}
 		}
 		catch (RecognitionException re) {
@@ -510,11 +467,11 @@ public class BrowPMNParser extends Parser {
 
 	public final StringContext string() throws RecognitionException {
 		StringContext _localctx = new StringContext(_ctx, getState());
-		enterRule(_localctx, 12, RULE_string);
+		enterRule(_localctx, 10, RULE_string);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(71);
+			setState(64);
 			((StringContext)_localctx).str = match(STRING);
 			((StringContext)_localctx).result =  new Str(((StringContext)_localctx).str.getText());
 			}
@@ -531,25 +488,24 @@ public class BrowPMNParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\3\u0430\ud6d1\u8206\uad2d\u4417\uaef1\u8d80\uaadd\3\26M\4\2\t\2\4\3\t"+
-		"\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\3\2\3\2\3\2\6\2\24\n\2\r\2"+
-		"\16\2\25\3\3\3\3\3\3\3\3\5\3\34\n\3\3\4\3\4\3\4\3\4\5\4\"\n\4\3\5\3\5"+
-		"\3\5\3\5\3\5\3\5\3\5\5\5+\n\5\3\5\3\5\3\5\3\5\3\5\3\5\3\5\3\5\5\5\65\n"+
-		"\5\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\5\6E\n\6\3"+
-		"\7\3\7\3\7\3\b\3\b\3\b\3\b\2\2\t\2\4\6\b\n\f\16\2\2L\2\23\3\2\2\2\4\33"+
-		"\3\2\2\2\6!\3\2\2\2\b\64\3\2\2\2\nD\3\2\2\2\fF\3\2\2\2\16I\3\2\2\2\20"+
-		"\21\5\4\3\2\21\22\b\2\1\2\22\24\3\2\2\2\23\20\3\2\2\2\24\25\3\2\2\2\25"+
-		"\23\3\2\2\2\25\26\3\2\2\2\26\3\3\2\2\2\27\30\5\6\4\2\30\31\b\3\1\2\31"+
-		"\34\3\2\2\2\32\34\7\16\2\2\33\27\3\2\2\2\33\32\3\2\2\2\34\5\3\2\2\2\35"+
-		"\36\5\b\5\2\36\37\b\4\1\2\37\"\3\2\2\2 \"\5\16\b\2!\35\3\2\2\2! \3\2\2"+
-		"\2\"\7\3\2\2\2#$\7\r\2\2$%\7\17\2\2%&\5\16\b\2&\'\b\5\1\2\'\65\3\2\2\2"+
-		"(+\7\5\2\2)+\7\6\2\2*(\3\2\2\2*)\3\2\2\2+,\3\2\2\2,-\7\r\2\2-.\7\17\2"+
-		"\2./\5\16\b\2/\60\b\5\1\2\60\65\3\2\2\2\61\62\5\f\7\2\62\63\b\5\1\2\63"+
-		"\65\3\2\2\2\64#\3\2\2\2\64*\3\2\2\2\64\61\3\2\2\2\65\t\3\2\2\2\66\67\5"+
-		"\b\5\2\678\7\t\2\289\5\b\5\29:\b\6\1\2:E\3\2\2\2;<\5\b\5\2<=\7\t\2\2="+
-		">\5\b\5\2>?\7\7\2\2?@\7\f\2\2@A\7\b\2\2AB\3\2\2\2BC\b\6\1\2CE\3\2\2\2"+
-		"D\66\3\2\2\2D;\3\2\2\2E\13\3\2\2\2FG\7\r\2\2GH\b\7\1\2H\r\3\2\2\2IJ\7"+
-		"\f\2\2JK\b\b\1\2K\17\3\2\2\2\b\25\33!*\64D";
+		"\3\u0430\ud6d1\u8206\uad2d\u4417\uaef1\u8d80\uaadd\3\26F\4\2\t\2\4\3\t"+
+		"\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\3\2\3\2\3\2\6\2\22\n\2\r\2\16\2\23"+
+		"\3\3\3\3\3\3\3\3\5\3\32\n\3\3\4\3\4\3\4\3\4\3\4\3\4\3\4\5\4#\n\4\3\5\3"+
+		"\5\3\5\3\5\3\5\3\5\3\5\5\5,\n\5\3\5\3\5\3\5\3\5\3\5\5\5\63\n\5\3\6\3\6"+
+		"\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\5\6A\n\6\3\7\3\7\3\7\3\7\2\2"+
+		"\b\2\4\6\b\n\f\2\2F\2\21\3\2\2\2\4\31\3\2\2\2\6\"\3\2\2\2\b\62\3\2\2\2"+
+		"\n@\3\2\2\2\fB\3\2\2\2\16\17\5\4\3\2\17\20\b\2\1\2\20\22\3\2\2\2\21\16"+
+		"\3\2\2\2\22\23\3\2\2\2\23\21\3\2\2\2\23\24\3\2\2\2\24\3\3\2\2\2\25\26"+
+		"\5\6\4\2\26\27\b\3\1\2\27\32\3\2\2\2\30\32\7\16\2\2\31\25\3\2\2\2\31\30"+
+		"\3\2\2\2\32\5\3\2\2\2\33\34\5\b\5\2\34\35\b\4\1\2\35#\3\2\2\2\36#\5\f"+
+		"\7\2\37 \5\n\6\2 !\b\4\1\2!#\3\2\2\2\"\33\3\2\2\2\"\36\3\2\2\2\"\37\3"+
+		"\2\2\2#\7\3\2\2\2$%\7\r\2\2%&\7\17\2\2&\'\5\f\7\2\'(\b\5\1\2(\63\3\2\2"+
+		"\2),\7\5\2\2*,\7\6\2\2+)\3\2\2\2+*\3\2\2\2,-\3\2\2\2-.\7\r\2\2./\7\17"+
+		"\2\2/\60\5\f\7\2\60\61\b\5\1\2\61\63\3\2\2\2\62$\3\2\2\2\62+\3\2\2\2\63"+
+		"\t\3\2\2\2\64\65\7\r\2\2\65\66\7\t\2\2\66\67\7\r\2\2\67A\b\6\1\289\7\r"+
+		"\2\29:\7\t\2\2:;\7\r\2\2;<\7\7\2\2<=\7\f\2\2=>\7\b\2\2>?\3\2\2\2?A\b\6"+
+		"\1\2@\64\3\2\2\2@8\3\2\2\2A\13\3\2\2\2BC\7\f\2\2CD\b\7\1\2D\r\3\2\2\2"+
+		"\b\23\31\"+\62@";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {

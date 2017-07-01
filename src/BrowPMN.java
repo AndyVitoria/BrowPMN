@@ -19,13 +19,10 @@ public class BrowPMN {
             FileReader arq = new FileReader(nome);
             BufferedReader lerArq = new BufferedReader(arq);
 
-            String linha = lerArq.readLine(); // lê a primeira linha
-// a variável "linha" recebe o valor "null" quando o processo
-// de repetição atingir o final do arquivo texto
+            String linha = lerArq.readLine();
             while (linha != null) {
-                System.out.printf("%s\n", linha);
                 arquivo.add(linha);
-                linha = lerArq.readLine(); // lê da segunda até a última linha
+                linha = lerArq.readLine();
             }
 
             arq.close();
@@ -37,10 +34,24 @@ public class BrowPMN {
         return arquivo;
     }
 
+    public static void escreverArquivo(ArrayList<String> arquivo) throws IOException {
+        FileWriter arq = new FileWriter(arquivo.get(0) + "gv");
+        PrintWriter gravarArq = new PrintWriter(arq);
+
+        for (int i=1; i< arquivo.size(); i++) {
+            gravarArq.printf(arquivo.get(i));
+        }
+        arq.close();
+    }
+
+
     public static void main(String[] args) throws IOException {
         ArrayList<String> arquivo = lerArquivo("teste.txt");
 
         ArrayList<String> saida = new ArrayList<String>();
+        saida.add("teste.");
+        saida.add("digraph G {\ncompound=true;\n");
+
         BufferedReader rd = new BufferedReader(new InputStreamReader(System.in));
         System.out.printf(">>> ");
         String expr;
@@ -56,10 +67,10 @@ public class BrowPMN {
             BrowPMNParser parser = new BrowPMNParser(tokens);
             BrowPMNParser.SttmContext ans = parser.sttm();
             if (ans.result != null) {
-                System.out.println(ans.result);
-                System.out.println(ans.result.eval(ctx).getName());
-                System.out.println(ans.result.eval(ctx));
-                System.out.println(String.valueOf(ctx.values()) + '\n');
+                System.out.println(ans.result.toString());
+                System.out.println(ans.result.getFluxe());
+                //System.out.println(ans.result.eval(ctx));
+                //System.out.println(String.valueOf(ctx.values()) + '\n');
 
                 if (ans.result.getMetadata() != null)
                     saida.add(ans.result.getMetadata());
@@ -68,9 +79,10 @@ public class BrowPMN {
             lineNo += 1;
         }
         System.out.println("\n\n\n");
-        for(int i = 0; i < saida.size(); i++){
-            System.out.println(saida.get(i));
-        }
+        saida.add("}");
+
+        BrowPMN.escreverArquivo(saida);
+
     }
 
 
