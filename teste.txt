@@ -1,9 +1,0 @@
-!Inicio = "Pegar um prato"
-Comida = "Comida"
-Inicio->Comida ("Colocar")
-Talher = "Talher"
-Comida->Talher ("Pega um")
-#Fim = "Prato Vazio"
-Comer = "Come um pouco"
-Talher->Comer
-Comer->Fim

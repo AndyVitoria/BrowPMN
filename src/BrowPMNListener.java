@@ -1,8 +1,9 @@
-// Generated from BrowPMN.g4 by ANTLR 4.5.1
+// Generated from BrowPMN.g4 by ANTLR 4.5
 
 import struct.*;
 import static struct.Node.*;
 
+import org.antlr.v4.runtime.misc.NotNull;
 import org.antlr.v4.runtime.tree.ParseTreeListener;
 
 /**
@@ -61,6 +62,16 @@ public interface BrowPMNListener extends ParseTreeListener {
 	 */
 	void exitFluxo(BrowPMNParser.FluxoContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link BrowPMNParser#ident}.
+	 * @param ctx the parse tree
+	 */
+	void enterIdent(BrowPMNParser.IdentContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link BrowPMNParser#ident}.
+	 * @param ctx the parse tree
+	 */
+	void exitIdent(BrowPMNParser.IdentContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link BrowPMNParser#string}.
 	 * @param ctx the parse tree
 	 */
@@ -70,4 +81,34 @@ public interface BrowPMNListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitString(BrowPMNParser.StringContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link BrowPMNParser#exclusive}.
+	 * @param ctx the parse tree
+	 */
+	void enterExclusive(BrowPMNParser.ExclusiveContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link BrowPMNParser#exclusive}.
+	 * @param ctx the parse tree
+	 */
+	void exitExclusive(BrowPMNParser.ExclusiveContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link BrowPMNParser#parallel}.
+	 * @param ctx the parse tree
+	 */
+	void enterParallel(BrowPMNParser.ParallelContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link BrowPMNParser#parallel}.
+	 * @param ctx the parse tree
+	 */
+	void exitParallel(BrowPMNParser.ParallelContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link BrowPMNParser#loop}.
+	 * @param ctx the parse tree
+	 */
+	void enterLoop(BrowPMNParser.LoopContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link BrowPMNParser#loop}.
+	 * @param ctx the parse tree
+	 */
+	void exitLoop(BrowPMNParser.LoopContext ctx);
 }

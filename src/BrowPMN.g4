@@ -18,23 +18,30 @@ sttm returns [Node result]
 
 assinatura returns [Node result]
     : atribuicao {$result = $atribuicao.result;}
-    | string// valor {$result = $valor.result;}
     | fluxo {$result = $fluxo.result;}
+    | exclusive {$result = $exclusive.result;}
+    | parallel {$result = $parallel.result;}
+    | loop {$result = $loop.result;}
     ;
-
 
 
 atribuicao returns [Node result]
     : id=ID '=' string {$result = mkAssing($id.getText(), $string.result, "");}
     | (tag=TAGINICIO|tag=TAGFIM) id=ID '=' string {$result = mkAssing($id.getText(), $string.result, $tag.getText());}
-    //| id=ID '=' valor {$result = mkAssing($id.getText(), $valor.result);}
-    //| variavel {$result = $variavel.result;}
     ;
 
 
 fluxo returns [Node result]
-    : (var=ID) '->' (next=ID) {$result = Node.setNextNode($var.getText(), $next.getText(), "");}
-    | (var=ID) '->' (next=ID) ('(' str=STRING ')') {$result = Node.setNextNode($var.getText(), $next.getText(), $str.getText());}
+    : var=ident '->' next=ident {$result = Node.setNextNode($var.result, $next.result, "");}
+    | var=ident '->' next=ident ('(' str=STRING ')') {$result = Node.setNextNode($var.result, $next.result, $str.getText());}
+    ;
+
+
+ident returns [String result]
+    : var=ID  {$result = new String($var.getText());}
+    | var='*' {$result = new String($var.getText());}
+    | var='+' {$result = new String($var.getText());}
+    | var='@' {$result = new String($var.getText());}
     ;
 
 
@@ -42,64 +49,47 @@ string returns [Node result]
     : str = STRING {$result = new Str($str.getText());}
     ;
 
-/*
-condicional returns [Node result]
-    // Exclusivo
-    :  if=exclusivo //(elif=exclusivo_caminho)* (else=exclusivo_restante)? {$result = }
-    // Paralelo
-    | paralelo (paralelo_caminho)*
-    // Repetição
-    | loop {$result = $loop.result;}
 
+exclusive returns [Node result]
+    : 'if' '(' id1=ident ',' id2=ident ')' '{'
+        {$result = mkExclusive($id1.result, $id2.result, "","");}
+    | 'if' '(' id1=ident ',' id2=ident ')' '(' desc1=STRING ')' '{'
+        {$result = mkExclusive($id1.result, $id2.result, $desc1.getText(),"");}
+    | 'if' '(' id1=ident ',' id2=ident ')' '(' desc1=STRING ',' desc2=STRING ')' '{'
+        {$result = mkExclusive($id1.result, $id2.result, $desc1.getText(),$desc2.getText());}
+    | '}' {$result = closeConditional();}
     ;
 
 
-loop
-    :  WHILE LPAR ID COMMA ID RPAR (LPAR STRING RPAR)? LCOL (assinatura)* NEWLINE RCOL (LPAR STRING RPAR)?
+parallel returns [Node result]
+    : 'do' '(' id1=ident ',' id2=ident ')' '{'
+        {$result = mkParallel($id1.result, $id2.result, "","");}
+    | 'do' '(' id1=ident ',' id2=ident ')' '(' desc1=STRING ')' '{'
+        {$result = mkParallel($id1.result, $id2.result, $desc1.getText(),"");}
+    | 'do' '(' id1=ident ',' id2=ident ')' '(' desc1=STRING ',' desc2=STRING ')' '{'
+        {$result = mkParallel($id1.result, $id2.result, $desc1.getText(),$desc2.getText());}
+    | '}' {$result = Node.closeConditional();}
     ;
 
 
-paralelo
-    : DO LPAR ID COMMA ID RPAR (LPAR STRING RPAR)? LCOL (assinatura)* NEWLINE RCOL
+loop returns [Node result]
+    : 'while' '(' id1=ident ',' id2=ident ')' '{'
+        {$result = mkLoop($id1.result, $id2.result, "","");}
+    | 'while' '(' id1=ident ',' id2=ident ')' '(' desc1=STRING ')' '{'
+        {$result = mkLoop($id1.result, $id2.result, $desc1.getText(),"");}
+    | 'while' '(' id1=ident ',' id2=ident ')' '(' desc1=STRING ',' desc2=STRING ')' '{'
+        {$result = mkLoop($id1.result, $id2.result, $desc1.getText(),$desc2.getText());}
+    | '}' {$result = Node.closeConditional();}
     ;
 
 
-paralelo_caminho : ELSE RPAR (LPAR STRING RPAR)? LCOL (assinatura)* NEWLINE RCOL
-    ;
-
-
-exclusivo returns[Node result]
-    : IF '(' id1=ID ',' id2=ID ')' ('(' str1=STRING ',' str2=STRING ')') '{' (assinatura)* '}'
-        {$result = mkExclusive($id1.getText(), id2.getText(), str1.getText(), str2.getText());}
-    | IF '(' id1=ID ',' id2=ID ')' ('(' str1=STRING ')') '{' (assinatura)* '}'
-        {$result = mkExclusive($id1.getText(), id2.getText(), str1.getText(), "");}
-    | IF '(' id1=ID ',' id2=ID ')' '{' (assinatura)* '}'
-        {$result = mkExclusive($id1.getText(), id2.getText(), "", "");}
-
-    ;
-/*
-
-exclusivo_caminho
-    : ELIF LPAR ID COMMA ID RPAR (LPAR STRING RPAR)? LCOL (assinatura)* NEWLINE RCOL
-    ;
-
-
-exclusivo_restante
-    : ELSE RPAR (LPAR STRING RPAR)? LCOL (assinatura)* NEWLINE RCOL
-    ;
-*/
-
-
-
-FUNCTAG : 'def';
-COMMA : ',' ;
 TAGINICIO : '!' ;
 TAGFIM : '#' ;
 LPAR : '(' ;
 RPAR : ')' ;
+OPEN : '{' ;
+CLOSE : '}' ;
 PROXIMO : '->' ;
-LCOL : '{' ;
-RCOL : '}' ;
 fragment WS : ' ';
 fragment CHAR : [a-zA-Z0-9];
 fragment STRTAG : '"' ;
@@ -107,24 +97,4 @@ STRING : STRTAG (CHAR|WS)* STRTAG;
 ID : [_a-zA-Z][_a-zA-Z0-9]* ;
 NEWLINE : '\r'? '\n' ;
 ATRIBUICAO    : '=' ;
-WHILE : 'while' ;
-IF : 'if' ;
-ELIF : 'elif';
-ELSE : 'else' ;
-DO : 'do';
-AND : 'and';
 IGNORE : [ \t\r\n]+ -> skip;
-
-
-/*
-funcao returns [Node result]
-    : FUNCTAG func=ID LPAR (var1=ID (COMMA var2=ID)) RPAR LCOL codigo NEWLINE RCOL{
-        $result = new Function($func, $var1, $var2).setCode($codigo.result);
-    }
-//    : FUNCTAG ID LPAR (ID (COMMA ID)*)? RPAR LCOL codigo NEWLINE RCOL
-    ;
-*/
-
-
-
-

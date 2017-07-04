@@ -1,0 +1,48 @@
+digraph G {
+compound=true;
+start [label="", shape=circle];
+Inicio [label="Pegar um prato", shape=Square];
+start->Inicio;
+Comida [label="Comida", shape=Square];
+Inicio -> Comida [label="Colocar a"];
+if_0_start [label="X", fontsize=18, shape=diamond];
+if_0_end [label="X", fontsize=18, shape=diamond];
+if_0_end -> Comendo [label=""];
+Comida -> if_0_start [label="A pessoa eh"];
+Colher [label="Usa a Colher", shape=Square];
+if_0_start -> Colher [label="Crianca"];
+Colher -> if_0_end [label=""];
+Garfo [label="Usa o Garfo", shape=Square];
+Faca [label="Usar a Faca", shape=Square];
+if_0_start -> Garfo [label="Adulto"];
+if_1_start [label="X", fontsize=18, shape=diamond];
+if_1_end [label="X", fontsize=18, shape=diamond];
+if_1_end -> if_0_end [label=""];
+Garfo -> if_1_start [label="se quiser"];
+if_1_start -> Faca [label="Pode"];
+Faca -> if_1_end [label=""];
+if_1_start -> if_1_end [label="Ou Nao"];
+Comendo [label="Vou Comer", shape=Square];
+end [label="",shape=circle, style=bold];
+Fim [label="Prato Vazio", shape=Square];
+Fim->end;
+do_0_start [label="+", fontsize=18, shape=diamond];
+do_0_end [label="+", fontsize=18, shape=diamond];
+do_0_end -> Fim [label=""];
+Comendo -> do_0_start [label=""];
+do_0_start -> loop_0_start [label="Ainda tem comida"];
+loop_0_end -> do_0_end [label="Acabou a comida"];
+subgraph cluster0 {
+node [style=filled];
+label = "[Loop]";
+color=black
+loop_0_start [label="", shape=circle];
+loop_0_end [label="", shape=circle]
+Comer [label="Come um pouco", shape=Square];
+loop_0_start -> Comer [label="Pega Comida"];
+Comer -> loop_0_end [label=""];
+}
+TV [label="Televisao", shape=Square];
+do_0_start -> TV [label="Tambem vou ver"];
+TV -> do_0_end [label=""];
+}

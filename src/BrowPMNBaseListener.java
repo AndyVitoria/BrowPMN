@@ -1,10 +1,11 @@
-// Generated from BrowPMN.g4 by ANTLR 4.5.1
+// Generated from BrowPMN.g4 by ANTLR 4.5
 
 import struct.*;
 import static struct.Node.*;
 
 
 import org.antlr.v4.runtime.ParserRuleContext;
+import org.antlr.v4.runtime.misc.NotNull;
 import org.antlr.v4.runtime.tree.ErrorNode;
 import org.antlr.v4.runtime.tree.TerminalNode;
 
@@ -79,6 +80,18 @@ public class BrowPMNBaseListener implements BrowPMNListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterIdent(BrowPMNParser.IdentContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitIdent(BrowPMNParser.IdentContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterString(BrowPMNParser.StringContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -86,6 +99,42 @@ public class BrowPMNBaseListener implements BrowPMNListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitString(BrowPMNParser.StringContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterExclusive(BrowPMNParser.ExclusiveContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitExclusive(BrowPMNParser.ExclusiveContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterParallel(BrowPMNParser.ParallelContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitParallel(BrowPMNParser.ParallelContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterLoop(BrowPMNParser.LoopContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitLoop(BrowPMNParser.LoopContext ctx) { }
 
 	/**
 	 * {@inheritDoc}

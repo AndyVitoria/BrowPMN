@@ -10,5 +10,4 @@ public abstract class Type extends Node{
     public Node eval(Map<String, Node> ctx) {
         return this;
     }
-
 }

@@ -1,0 +1,34 @@
+!Inicio = "Pegar um prato"
+Comida = "Comida"
+Inicio->Comida ("Colocar a")
+
+if (Comida, Comendo) ("A pessoa eh"){
+    Colher = "Usa a Colher"
+    *->Colher ("Crianca")
+    Colher->*
+
+    Garfo = "Usa o Garfo"
+    Faca = "Usar a Faca"
+
+    *->Garfo ("Adulto")
+    if (Garfo, *) ("se quiser"){
+        *->Faca ("Pode")
+        Faca->*
+
+        *->* ("Ou Nao")
+    }
+}
+
+Comendo = "Vou Comer"
+#Fim = "Prato Vazio"
+do (Comendo, Fim) {
+    while (+, +) ("Ainda tem comida", "Acabou a comida"){
+        Comer = "Come um pouco"
+        @->Comer ("Pega Comida")
+        Comer->@
+    }
+
+    TV = "Televisao"
+    +->TV ("Tambem vou ver")
+    TV->+
+}
